@@ -40,30 +40,8 @@ data "aws_iam_policy_document" "default" {
     sid    = "01"
     effect = "Allow"
     actions = [
-      "ecr:GetRegistryPolicy",
-      "ecr:PutImageTagMutability",
-      "ecr:DescribeImageScanFindings",
-      "ecr:StartImageScan",
-      "ecr:GetLifecyclePolicyPreview",
       "ecr:GetDownloadUrlForLayer",
-      "ecr:DescribeRegistry",
-      "ecr:DescribeImageReplicationStatus",
-      "ecr:GetAuthorizationToken",
-      "ecr:ListTagsForResource",
-      "ecr:UploadLayerPart",
-      "ecr:BatchDeleteImage",
-      "ecr:ListImages",
-      "ecr:PutImage",
-      "ecr:BatchGetImage",
-      "ecr:CompleteLayerUpload",
-      "ecr:DescribeImages",
-      "ecr:DescribeRepositories",
-      "ecr:StartLifecyclePolicyPreview",
-      "ecr:InitiateLayerUpload",
-      "ecr:BatchCheckLayerAvailability",
-      "ecr:ReplicateImage",
-      "ecr:GetRepositoryPolicy",
-      "ecr:GetLifecyclePolicy"
+      "ecr:BatchGetImage"
     ]
     principals {
       type        = "AWS"
