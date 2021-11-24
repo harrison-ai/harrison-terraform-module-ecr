@@ -27,7 +27,7 @@ resource "aws_ecr_repository_policy" "default" {
   count = length(var.account_ids) > 0 && !var.override_policy ? 1 : 0
 
   repository = aws_ecr_repository.this.name
-  policy     = data.aws_iam_policy_document.this[0].json
+  policy     = data.aws_iam_policy_document.default[0].json
 }
 
 
