@@ -95,7 +95,7 @@ No modules.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_account_ids"></a> [account\_ids](#input\_account\_ids) | List of AWS Account ID's that will be granted access to the repository | `list(string)` | `[]` | no |
-| <a name="input_mutable"></a> [mutable](#input\_mutable) | Boolean setting for repository tag mutability | `bool` | `true` | no |
+| <a name="input_mutable_tags"></a> [mutable\_tags](#input\_mutable\_tags) | Boolean setting for repository tag mutability | `bool` | `true` | no |
 | <a name="input_name"></a> [name](#input\_name) | Name of the ECR Repository | `string` | n/a | yes |
 | <a name="input_override_policy"></a> [override\_policy](#input\_override\_policy) | Boolean setting to override the default policy | `bool` | `false` | no |
 | <a name="input_policy"></a> [policy](#input\_policy) | A json encoded policy to override the default policy | `string` | `null` | no |

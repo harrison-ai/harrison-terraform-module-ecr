@@ -3,7 +3,7 @@ variable "name" {
   description = "Name of the ECR Repository"
 }
 
-variable "mutable" {
+variable "mutable_tags" {
   type        = bool
   default     = true
   description = "Boolean setting for repository tag mutability"

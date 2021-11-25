@@ -1,6 +1,6 @@
 resource "aws_ecr_repository" "this" {
   name                 = var.name
-  image_tag_mutability = var.mutable ? "MUTABLE" : "IMMUTABLE"
+  image_tag_mutability = var.mutable_tags ? "MUTABLE" : "IMMUTABLE"
   image_scanning_configuration {
     scan_on_push = true
   }
@@ -32,7 +32,7 @@ resource "aws_ecr_repository_policy" "default" {
 
 
 # default policy if cross account ids are supplied
-# if not cross account ids supplied, no policy is created
+# if no cross account ids are supplied, no policy is created
 data "aws_iam_policy_document" "default" {
   count = length(var.account_ids) > 0 ? 1 : 0
 
