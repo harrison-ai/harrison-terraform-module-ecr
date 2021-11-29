@@ -1,3 +1,6 @@
+data "aws_region" "current" {}
+
+
 resource "aws_ecr_repository" "this" {
   name                 = var.name
   image_tag_mutability = var.mutable_tags ? "MUTABLE" : "IMMUTABLE"
@@ -37,7 +40,7 @@ data "aws_iam_policy_document" "default" {
   count = length(var.account_ids) > 0 ? 1 : 0
 
   statement {
-    sid    = "01"
+    sid    = "AllowAccountID"
     effect = "Allow"
     actions = [
       "ecr:GetDownloadUrlForLayer",
@@ -46,6 +49,23 @@ data "aws_iam_policy_document" "default" {
     principals {
       type        = "AWS"
       identifiers = [for id in var.account_ids : "arn:aws:iam::${id}:root"]
+    }
+  }
+  statement {
+    sid    = "AllowService"
+    effect = "Allow"
+    actions = [
+      "ecr:GetDownloadUrlForLayer",
+      "ecr:BatchGetImage"
+    ]
+    principals {
+      type        = "Service"
+      identifiers = "lambda.amazonaws.com"
+    }
+    condition {
+      test = "StringLike"
+      variable = "aws:sourceARN"
+      values =  [for id in var.account_ids : "arn:aws:lambda:${data.aws_region.current.name}:${id}:function:*"]
     }
   }
 }
