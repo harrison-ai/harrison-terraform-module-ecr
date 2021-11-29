@@ -60,12 +60,12 @@ data "aws_iam_policy_document" "default" {
     ]
     principals {
       type        = "Service"
-      identifiers = "lambda.amazonaws.com"
+      identifiers = ["lambda.amazonaws.com"]
     }
     condition {
-      test = "StringLike"
+      test     = "StringLike"
       variable = "aws:sourceARN"
-      values =  [for id in var.account_ids : "arn:aws:lambda:${data.aws_region.current.name}:${id}:function:*"]
+      values   = [for id in var.account_ids : "arn:aws:lambda:${data.aws_region.current.name}:${id}:function:*"]
     }
   }
 }
