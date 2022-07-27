@@ -36,3 +36,6 @@ terraform.rc
 # Envvars environoment configuration file
 .env
 .DS_Store
+
+# Vscode
+.vscode
