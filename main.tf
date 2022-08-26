@@ -81,3 +81,9 @@ data "aws_iam_policy_document" "default" {
     }
   }
 }
+
+
+moved {
+  from = module.example.aws_ecr_lifecycle_policy.this
+  to   = module.example.aws_ecr_lifecycle_policy.this[0]
+}
