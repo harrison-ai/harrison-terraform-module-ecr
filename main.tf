@@ -10,9 +10,21 @@ resource "aws_ecr_repository" "this" {
 }
 
 
-resource "aws_ecr_lifecycle_policy" "this" {
+# default lifecycle policy if override lifecycle policy is not supplied
+resource "aws_ecr_lifecycle_policy" "default" {
+  count = var.override_lifecycle_policy ? 0 : 1
+
   repository = aws_ecr_repository.this.name
   policy     = jsonencode(local.effective_policy)
+}
+
+
+# override lifecycle policy - user supplied
+resource "aws_ecr_lifecycle_policy" "this" {
+  count = var.override_lifecycle_policy ? 1 : 0
+
+  repository = aws_ecr_repository.this.name
+  policy     = jsonencode(var.lifecycle_policy)
 }
 
 
@@ -68,4 +80,10 @@ data "aws_iam_policy_document" "default" {
       values   = [for id in var.account_ids : "arn:aws:lambda:${data.aws_region.current.name}:${id}:function:*"]
     }
   }
+}
+
+
+moved {
+  from = module.example.aws_ecr_lifecycle_policy.this
+  to   = module.example.aws_ecr_lifecycle_policy.this[0]
 }
