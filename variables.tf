@@ -38,3 +38,15 @@ variable "policy" {
   default     = null
   description = "A json encoded policy to override the default policy"
 }
+
+variable "override_lifecycle_policy" {
+  type        = bool
+  default     = false
+  description = "Boolean setting to override the default lifecycle policy"
+}
+
+variable "lifecycle_policy" {
+  type        = map(any)
+  default     = null
+  description = "A lifecycle policy to override the default policy"
+}
