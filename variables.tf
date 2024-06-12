@@ -50,3 +50,9 @@ variable "lifecycle_policy" {
   default     = null
   description = "A lifecycle policy to override the default policy"
 }
+
+variable "tags" {
+  type        = map(string)
+  default     = {}
+  description = "A map of tags to assign to the resource"
+}
