@@ -46,13 +46,13 @@ Both the lifecycle policy and repository policy can be overriden with custom use
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.2 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 4.0 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 5.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 4.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 5.0 |
 
 ## Modules
 
@@ -82,6 +82,7 @@ No modules.
 | <a name="input_override_policy"></a> [override\_policy](#input\_override\_policy) | Boolean setting to override the default policy | `bool` | `false` | no |
 | <a name="input_policy"></a> [policy](#input\_policy) | A json encoded policy to override the default policy | `string` | `null` | no |
 | <a name="input_tagged_images_to_keep"></a> [tagged\_images\_to\_keep](#input\_tagged\_images\_to\_keep) | Number of tagged images to keep | `number` | `5` | no |
+| <a name="input_tags"></a> [tags](#input\_tags) | A map of tags to assign to the resource | `map(string)` | `{}` | no |
 | <a name="input_untagged_images_to_keep"></a> [untagged\_images\_to\_keep](#input\_untagged\_images\_to\_keep) | Number of untagged images to keep | `number` | `1` | no |
 
 ## Outputs
