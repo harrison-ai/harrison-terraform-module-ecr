@@ -16,7 +16,7 @@ Opinionated in that this is designed primarily for publishing Docker images into
 
 ```terraform
 module "example" {
-  source = "git@github.com:harrison-ai/harrison-terraform-module-ecr.git"
+  source = "github.com/harrison-ai/harrison-terraform-module-ecr?ref=0.1.3"
 
   name = "example"
 }
@@ -26,7 +26,7 @@ module "example" {
 
 ```terraform
 module "example" {
-  source = "git@github.com:harrison-ai/harrison-terraform-module-ecr.git"
+  source = "github.com/harrison-ai/harrison-terraform-module-ecr?ref=0.1.3"
 
   name                    = "example"
   account_ids             = ["012345678912"]
