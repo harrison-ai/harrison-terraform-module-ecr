@@ -33,4 +33,7 @@ locals {
     ]
   }
 
+  lambda_cross_account_enabled = alltrue([length(var.account_ids) > 0, var.cross_account_service == "Lambda"])
+  eks_cross_account_enabled    = alltrue([length(var.account_ids) > 0, var.cross_account_service == "EKS"])
+
 }
