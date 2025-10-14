@@ -43,6 +43,11 @@ variable "override_policy" {
   description = "Boolean setting to override the default policy"
 }
 
+variable "region" {
+  type        = string
+  description = "The AWS Region in which to create resources"
+  default     = null
+}
 variable "policy" {
   type        = string
   default     = null
