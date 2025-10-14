@@ -1,9 +1,12 @@
-data "aws_region" "current" {}
+data "aws_region" "current" {
+  region = var.region
+}
 
 
 resource "aws_ecr_repository" "this" {
   name                 = var.name
   image_tag_mutability = var.mutable_tags ? "MUTABLE" : "IMMUTABLE"
+  region               = var.region
   tags                 = var.tags
 
   image_scanning_configuration {
@@ -15,6 +18,7 @@ resource "aws_ecr_repository" "this" {
 resource "aws_ecr_lifecycle_policy" "default" {
   count = var.override_lifecycle_policy ? 0 : 1
 
+  region     = var.region
   repository = aws_ecr_repository.this.name
   policy     = jsonencode(local.effective_policy)
 }
@@ -24,6 +28,7 @@ resource "aws_ecr_lifecycle_policy" "default" {
 resource "aws_ecr_lifecycle_policy" "this" {
   count = var.override_lifecycle_policy ? 1 : 0
 
+  region     = var.region
   repository = aws_ecr_repository.this.name
   policy     = jsonencode(var.lifecycle_policy)
 }
@@ -31,7 +36,9 @@ resource "aws_ecr_lifecycle_policy" "this" {
 
 # override repo policy - user supplied
 resource "aws_ecr_repository_policy" "override" {
-  count      = length(var.account_ids) == 0 && var.override_policy ? 1 : 0
+  count = length(var.account_ids) == 0 && var.override_policy ? 1 : 0
+
+  region     = var.region
   repository = aws_ecr_repository.this.name
   policy     = var.policy
 
@@ -41,6 +48,7 @@ resource "aws_ecr_repository_policy" "override" {
 resource "aws_ecr_repository_policy" "default" {
   count = (local.eks_cross_account_enabled || local.lambda_cross_account_enabled) && !var.override_policy ? 1 : 0
 
+  region     = var.region
   repository = aws_ecr_repository.this.name
   policy     = data.aws_iam_policy_document.default[0].json
 }
